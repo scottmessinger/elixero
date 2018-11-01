@@ -29,6 +29,11 @@ defmodule EliXero.CoreApi.Invoices do
     |> EliXero.CoreApi.Utils.ResponseHandler.handle_response(@model_module)
   end
 
+  def email(client, identifier) do
+    EliXero.CoreApi.Common.update(client, @resource, identifier <> "/Email", %{})
+    |> EliXero.CoreApi.Utils.ResponseHandler.handle_response(@model_module)
+  end
+
   def online_invoice_url(client, identifier) do
     resource = @resource <> "/" <> identifier <> "/OnlineInvoice"
 
