@@ -1,9 +1,9 @@
-defmodule EliXero.Mixfile do
+defmodule XeroXero.Mixfile do
   use Mix.Project
 
   def project do
-    [app: :elixero,
-     version: "0.1.1",
+    [app: :xeroxero,
+     version: "0.3.0",
      elixir: "~> 1.3",
      description: description(),
      package: package(),
@@ -33,7 +33,7 @@ defmodule EliXero.Mixfile do
     [
       maintainers: ["MJMortimer"],
       licenses: ["MIT"],
-      links: %{"Github" => "https://github.com/MJMortimer/elixero"}
+      links: %{"Github" => "https://github.com/etehtsea/elixero"}
     ]
   end
 end
