@@ -2,7 +2,7 @@ defmodule XeroXero.CoreApi.Models.Allocations.Allocation do
     use Ecto.Schema
     import Ecto.Changeset
     
-    @derive {Poison.Encoder, except: [:__meta__, :id]}
+    @derive {Jason.Encoder, except: [:__meta__, :id]}
 
     schema "allocations" do
         embeds_one :CreditNote, XeroXero.CoreApi.Models.CreditNotes.CreditNote        

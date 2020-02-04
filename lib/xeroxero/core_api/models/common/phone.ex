@@ -2,7 +2,7 @@ defmodule XeroXero.CoreApi.Models.Common.Phone do
     use Ecto.Schema
     import Ecto.Changeset
 
-    @derive {Poison.Encoder, except: [:__meta__, :id]}
+    @derive {Jason.Encoder, except: [:__meta__, :id]}
 
     schema "phones" do
         field :PhoneType, :string

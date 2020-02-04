@@ -2,7 +2,7 @@ defmodule XeroXero.CoreApi.Models.ExpenseClaims do
     use Ecto.Schema
     import Ecto.Changeset
 
-    @derive {Poison.Encoder, except: [:__meta__, :id]}
+    @derive {Jason.Encoder, except: [:__meta__, :id]}
 
     schema "expenseclaims" do
         embeds_many :ExpenseClaims, XeroXero.CoreApi.Models.ExpenseClaims.ExpenseClaim

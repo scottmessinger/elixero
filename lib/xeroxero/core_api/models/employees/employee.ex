@@ -2,7 +2,7 @@ defmodule XeroXero.CoreApi.Models.Employees.Employee do
     use Ecto.Schema
     import Ecto.Changeset
 
-    @derive {Poison.Encoder, except: [:__meta__, :id]}
+    @derive {Jason.Encoder, except: [:__meta__, :id]}
 
     schema "employees" do
         field :EmployeeID, Ecto.UUID

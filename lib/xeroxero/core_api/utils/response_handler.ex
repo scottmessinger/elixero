@@ -10,14 +10,14 @@ defmodule XeroXero.CoreApi.Utils.ResponseHandler do
     end
 
     defp transform(json, module, :ok) do
-        case (Poison.decode json, keys: :atoms) do
+        case (Jason.decode json, keys: :atoms) do
             {:ok, data} -> module.from_map data
             _ -> "Something went wrong transforming to module"
         end
     end
 
     defp transform(json, module, :bad_request) do
-        case (Poison.decode json, keys: :atoms) do
+        case (Jason.decode json, keys: :atoms) do
             {:ok, %{:ErrorNumber => 10} = data} -> module.from_validation_exception data
             {:ok, data}                         -> data
             _                                   -> "Something went wrong transforming to module"
@@ -25,7 +25,7 @@ defmodule XeroXero.CoreApi.Utils.ResponseHandler do
     end
 
     defp transform_to_api_exception(json) do
-        case (Poison.decode json, keys: :atoms) do
+        case (Jason.decode json, keys: :atoms) do
             {:ok, data} -> XeroXero.CoreApi.Models.Exceptions.ApiException.from_map data
             _ -> "Something went wrong transforming to module"
         end

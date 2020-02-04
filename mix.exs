@@ -3,7 +3,7 @@ defmodule XeroXero.Mixfile do
 
   def project do
     [app: :xeroxero,
-     version: "0.4.0",
+     version: "0.5.0",
      elixir: "~> 1.3",
      description: description(),
      package: package(),
@@ -11,14 +11,14 @@ defmodule XeroXero.Mixfile do
   end
 
   def application do
-    [applications: [:logger, :httpoison, :poison]]
+    [applications: [:logger, :httpoison, :jason]]
   end
 
   defp deps do
     [
+      {:jason, "~> 1.1"},
       {:httpoison, "~> 1.2"},
       {:ex_doc, ">= 0.0.0", only: :dev},
-      {:poison, "~> 3.0"},
       {:ecto, "~> 2.1 or ~> 3.0"}
     ]
   end

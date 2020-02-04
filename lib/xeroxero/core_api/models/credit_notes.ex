@@ -2,7 +2,7 @@ defmodule XeroXero.CoreApi.Models.CreditNotes do
     use Ecto.Schema
     import Ecto.Changeset
 
-    @derive {Poison.Encoder, except: [:__meta__, :id]}
+    @derive {Jason.Encoder, except: [:__meta__, :id]}
 
     schema "creditnotes" do
         embeds_many :CreditNotes, XeroXero.CoreApi.Models.CreditNotes.CreditNote

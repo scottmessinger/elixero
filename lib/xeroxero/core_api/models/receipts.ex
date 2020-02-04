@@ -2,7 +2,7 @@ defmodule XeroXero.CoreApi.Models.Receipts do
     use Ecto.Schema
     import Ecto.Changeset
     
-    @derive {Poison.Encoder, except: [:__meta__, :id]}
+    @derive {Jason.Encoder, except: [:__meta__, :id]}
 
     schema "receipts" do
         embeds_many :Receipts, XeroXero.CoreApi.Models.Receipts.Receipt

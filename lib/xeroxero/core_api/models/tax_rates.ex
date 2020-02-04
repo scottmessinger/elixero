@@ -2,7 +2,7 @@ defmodule XeroXero.CoreApi.Models.TaxRates do
     use Ecto.Schema
     import Ecto.Changeset
     
-    @derive {Poison.Encoder, except: [:__meta__, :id]}
+    @derive {Jason.Encoder, except: [:__meta__, :id]}
 
     schema "taxrates" do
         embeds_many :TaxRates, XeroXero.CoreApi.Models.TaxRates.TaxRate

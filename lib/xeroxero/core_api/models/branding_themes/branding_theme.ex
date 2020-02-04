@@ -2,7 +2,7 @@ defmodule XeroXero.CoreApi.Models.BrandingThemes.BrandingTheme do
     use Ecto.Schema
     import Ecto.Changeset
 
-    @derive {Poison.Encoder, except: [:__meta__, :id]}
+    @derive {Jason.Encoder, except: [:__meta__, :id]}
 
     schema "brandingthemes" do
         field :BrandingThemeID, Ecto.UUID

@@ -2,7 +2,7 @@ defmodule XeroXero.CoreApi.Models.ManualJournals.ManualJournal.JournalLine do
     use Ecto.Schema
     import Ecto.Changeset
 
-    @derive {Poison.Encoder, except: [:__meta__, :id]}
+    @derive {Jason.Encoder, except: [:__meta__, :id]}
 
     schema "journallines" do
         field :Description, :string

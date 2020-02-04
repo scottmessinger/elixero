@@ -2,7 +2,7 @@ defmodule XeroXero.CoreApi.Models.InvoiceReminders do
     use Ecto.Schema
     import Ecto.Changeset
 
-    @derive {Poison.Encoder, except: [:__meta__, :id]}
+    @derive {Jason.Encoder, except: [:__meta__, :id]}
 
     schema "invoiceReminders" do
         embeds_many :InvoiceReminders, XeroXero.CoreApi.Models.InvoiceReminders.InvoiceReminder

@@ -24,7 +24,7 @@ defmodule XeroXero.Utils.Http do
   end
 
   def put(url, authorisation_header, data_map) do
-    {_, payload} = Poison.encode(data_map)
+    {_, payload} = Jason.encode(data_map)
 
     {:ok, response} = HTTPoison.put url, payload, [{"Authorization", authorisation_header}, {"Accept", @accept}, {"User-Agent", user_agent()}], [{:recv_timeout, @connection_timeout}] # ++ [{:proxy, "127.0.0.1:8888"}]
 
@@ -32,7 +32,7 @@ defmodule XeroXero.Utils.Http do
   end
 
   def post(url, authorisation_header, data_map) do
-    {_, payload} = Poison.encode(data_map)
+    {_, payload} = Jason.encode(data_map)
 
     {:ok, response} = HTTPoison.post url, payload, [{"Authorization", authorisation_header}, {"Accept", @accept}, {"User-Agent", user_agent()}], [{:recv_timeout, @connection_timeout}] # ++ [{:proxy, "127.0.0.1:8888"}]
 
@@ -87,7 +87,7 @@ defmodule XeroXero.Utils.Http do
   defp handle_json_response(response) do
     resp = %{"http_status_code" => response.status_code}
 
-    {_, parsed} = Poison.Parser.parse(response.body)
+    {_, parsed} = Jason.decode(response.body)
     Map.merge(resp, parsed)
   end
 

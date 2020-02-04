@@ -2,7 +2,7 @@ defmodule XeroXero.CoreApi.Models.OnlineInvoices do
     use Ecto.Schema
     import Ecto.Changeset
     
-    @derive {Poison.Encoder, except: [:__meta__, :id]}
+    @derive {Jason.Encoder, except: [:__meta__, :id]}
 
     schema "onlineinvoices" do
         embeds_many :OnlineInvoices, XeroXero.CoreApi.Models.OnlineInvoices.OnlineInvoice

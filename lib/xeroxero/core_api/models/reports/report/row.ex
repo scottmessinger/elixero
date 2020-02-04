@@ -2,7 +2,7 @@ defmodule XeroXero.CoreApi.Models.Reports.Report.Row do
   use Ecto.Schema
   import Ecto.Changeset
 
-  @derive {Poison.Encoder, except: [:__meta__, :id]}
+  @derive {Jason.Encoder, except: [:__meta__, :id]}
 
   schema "rows" do
     field :RowType, :string

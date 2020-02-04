@@ -2,7 +2,7 @@ defmodule XeroXero.CoreApi.Models.Currencies.Currency do
     use Ecto.Schema
     import Ecto.Changeset
 
-    @derive {Poison.Encoder, except: [:__meta__, :id]}
+    @derive {Jason.Encoder, except: [:__meta__, :id]}
 
     schema "currencies" do
         field :Code, :string

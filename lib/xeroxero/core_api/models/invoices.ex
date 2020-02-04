@@ -2,7 +2,7 @@ defmodule XeroXero.CoreApi.Models.Invoices do
     use Ecto.Schema
     import Ecto.Changeset
 
-    @derive {Poison.Encoder, except: [:__meta__, :id]}
+    @derive {Jason.Encoder, except: [:__meta__, :id]}
 
     schema "invoices" do
         embeds_many :Invoices, XeroXero.CoreApi.Models.Invoices.Invoice
@@ -17,7 +17,7 @@ defmodule XeroXero.CoreApi.Models.Invoices do
 
     def from_validation_exception(data) do
         remapped_data = %{:Invoices => data."Elements"}
-        
+
         %__MODULE__{}
         |> cast(remapped_data, [])
         |> cast_embed(:Invoices)

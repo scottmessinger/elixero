@@ -2,7 +2,7 @@ defmodule XeroXero.CoreApi.Models.Users do
     use Ecto.Schema
     import Ecto.Changeset
 
-    @derive {Poison.Encoder, except: [:__meta__, :id]}
+    @derive {Jason.Encoder, except: [:__meta__, :id]}
 
     schema "users" do
         embeds_many :Users, XeroXero.CoreApi.Models.Users.User

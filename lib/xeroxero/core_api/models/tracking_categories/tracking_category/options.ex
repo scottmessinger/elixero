@@ -2,7 +2,7 @@ defmodule XeroXero.CoreApi.Models.TrackingCategories.TrackingCategory.Options do
     use Ecto.Schema
     import Ecto.Changeset
     
-    @derive {Poison.Encoder, except: [:__meta__, :id]}
+    @derive {Jason.Encoder, except: [:__meta__, :id]}
 
     schema "options" do
         embeds_many :Options, XeroXero.CoreApi.Models.TrackingCategories.TrackingCategory.Options.Option

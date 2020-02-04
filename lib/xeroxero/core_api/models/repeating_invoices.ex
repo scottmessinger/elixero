@@ -2,7 +2,7 @@ defmodule XeroXero.CoreApi.Models.RepeatingInvoices do
     use Ecto.Schema    
     import Ecto.Changeset
 
-    @derive {Poison.Encoder, except: [:__meta__, :id]}
+    @derive {Jason.Encoder, except: [:__meta__, :id]}
 
     schema "repeatinginvoices" do
         embeds_many :RepeatingInvoices, XeroXero.CoreApi.Models.RepeatingInvoices.RepeatingInvoice

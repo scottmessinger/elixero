@@ -2,7 +2,7 @@ defmodule XeroXero.CoreApi.Models.ManualJournals do
     use Ecto.Schema
     import Ecto.Changeset
 
-    @derive {Poison.Encoder, except: [:__meta__, :id]}
+    @derive {Jason.Encoder, except: [:__meta__, :id]}
 
     schema "manualjournals" do
         embeds_many :ManualJournals, XeroXero.CoreApi.Models.ManualJournals.ManualJournal

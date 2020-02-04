@@ -2,7 +2,7 @@ defmodule XeroXero.CoreApi.Models.Exceptions.ApiException do
     use Ecto.Schema
     import Ecto.Changeset
 
-    @derive {Poison.Encoder, except: [:__meta__, :id]}
+    @derive {Jason.Encoder, except: [:__meta__, :id]}
 
     schema "apiexceptions" do
         field :ErrorNumber, :integer
