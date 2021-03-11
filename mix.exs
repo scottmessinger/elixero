@@ -3,15 +3,17 @@ defmodule XeroXero.Mixfile do
 
   def project do
     [app: :xeroxero,
-     version: "0.5.0",
-     elixir: "~> 1.3",
+     version: "0.6.0",
+     elixir: "~> 1.10",
      description: description(),
      package: package(),
      deps: deps()]
   end
 
   def application do
-    [applications: [:logger, :httpoison, :jason]]
+    [
+      extra_applications: [:logger]
+    ]
   end
 
   defp deps do
