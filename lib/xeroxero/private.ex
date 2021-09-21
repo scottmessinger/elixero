@@ -1,20 +1,28 @@
 defmodule XeroXero.Private do
 
-  def find(access_token, resource, api_type) do
+  def refresh_token(resource, refresh_token, client_id, client_secret) do
+    url = XeroXero.Utils.Urls.token_url(resource)
+    data_map = %{grant_type: "refresh_token", refresh_token: refresh_token}
+    header = "Basic " <> Base.encode64(client_id <> ":" <> client_secret)
+
+    XeroXero.Utils.Http.post(url, header, data_map)
+  end
+
+  def find(client, resource, api_type) do
     url = XeroXero.Utils.Urls.api(resource, api_type)
+    headers = [{"Authorization", "Bearer " <> client.access_token}, {"xero-tenant-id", client.xero_tenant_id}]
 
-    header = XeroXero.Utils.Oauth.create_auth_header("GET", url, [oauth_token: access_token["oauth_token"]])
-    XeroXero.Utils.Http.get(url, header)
+    XeroXero.Utils.Http.get(url, headers)
   end
 
-  def find(access_token, resource, api_type, query_filters, extra_headers) do
+  def find(client, resource, api_type, query_filters, extra_headers) do
     url = XeroXero.Utils.Urls.api(resource, api_type) |> XeroXero.Utils.Urls.append_query_filters(query_filters)
+    headers = [{"Authorization", "Bearer " <> client.access_token}, {"xero-tenant-id", client.xero_tenant_id}]
 
-    header = XeroXero.Utils.Oauth.create_auth_header("GET", url, [oauth_token: access_token["oauth_token"]])
-    XeroXero.Utils.Http.get(url, header, extra_headers)
+    XeroXero.Utils.Http.get(url, headers, extra_headers)
   end
 
-  def create(access_token, resource, api_type, data_map) do
+  def create(client, resource, api_type, data_map) do
     url = XeroXero.Utils.Urls.api(resource, api_type)
 
     method =
@@ -22,14 +30,14 @@ defmodule XeroXero.Private do
         :core -> "PUT"
       end
 
-    header = XeroXero.Utils.Oauth.create_auth_header(method, url, [oauth_token: access_token["oauth_token"]])
+    headers = [{"Authorization", "Bearer " <> client.access_token}, {"xero-tenant-id", client.xero_tenant_id}]
 
     case(method) do
-      "PUT" -> XeroXero.Utils.Http.put(url, header, data_map)
+      "PUT" -> XeroXero.Utils.Http.put(url, headers, data_map)
     end
   end
 
-  def update(access_token, resource, api_type, data_map) do
+  def update(client, resource, api_type, data_map) do
     url = XeroXero.Utils.Urls.api(resource, api_type)
 
     method =
@@ -37,27 +45,25 @@ defmodule XeroXero.Private do
         :core -> "POST"
       end
 
-    header = XeroXero.Utils.Oauth.create_auth_header(method, url, [oauth_token: access_token["oauth_token"]])
+    headers = [{"Authorization", "Bearer " <> client.access_token}, {"xero-tenant-id", client.xero_tenant_id}]
 
     case(method) do
-      "POST" -> XeroXero.Utils.Http.post(url, header, data_map)
+      "POST" -> XeroXero.Utils.Http.post(url, headers, data_map)
     end
   end
 
-  def delete(access_token, resource, api_type) do
+  def delete(client, resource, api_type) do
     url = XeroXero.Utils.Urls.api(resource, api_type)
+    headers = [{"Authorization", "Bearer " <> client.access_token}, {"xero-tenant-id", client.xero_tenant_id}]
 
-    header = XeroXero.Utils.Oauth.create_auth_header("DELETE", url, [oauth_token: access_token["oauth_token"]])
-
-    XeroXero.Utils.Http.delete(url, header)
+    XeroXero.Utils.Http.delete(url, headers)
   end
 
-  def upload_multipart(access_token, resource, api_type, path_to_file, name) do
+  def upload_multipart(client, resource, api_type, path_to_file, name) do
     url = XeroXero.Utils.Urls.api(resource, api_type)
+    headers = [{"Authorization", "Bearer " <> client.access_token}, {"xero-tenant-id", client.xero_tenant_id}]
 
-    header = XeroXero.Utils.Oauth.create_auth_header("POST", url, [oauth_token: access_token["oauth_token"]])
-
-    XeroXero.Utils.Http.post_multipart(url, header, path_to_file, name)
+    XeroXero.Utils.Http.post_multipart(url, headers, path_to_file, name)
   end
 
   def upload_attachment(access_token, resource, api_type, path_to_file, filename, include_online) do

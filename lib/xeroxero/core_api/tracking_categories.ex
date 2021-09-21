@@ -38,7 +38,7 @@ defmodule XeroXero.CoreApi.TrackingCategories do
     resource = @resource <> identifier <> "/options"
 
     case client.app_type do
-      :private -> XeroXero.Private.create(client.access_token, resource, @api_type, options_map)
+      :private -> XeroXero.Private.create(client, resource, @api_type, options_map)
       :public -> XeroXero.Public.create(client.access_token, resource, @api_type, options_map)
       :partner -> XeroXero.Partner.create(client.access_token, resource, @api_type, options_map)
     end

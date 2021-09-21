@@ -23,18 +23,27 @@ defmodule XeroXero.Utils.Http do
     response
   end
 
-  def put(url, authorisation_header, data_map) do
+  def put(url, headers, data_map) do
     {_, payload} = Jason.encode(data_map)
 
-    {:ok, response} = HTTPoison.put url, payload, [{"Authorization", authorisation_header}, {"Accept", @accept}, {"User-Agent", user_agent()}], [{:recv_timeout, @connection_timeout}] # ++ [{:proxy, "127.0.0.1:8888"}]
+    headers = headers ++ [{"Accept", @accept}, {"User-Agent", user_agent()}]
+    {:ok, response} = HTTPoison.put url, payload, headers, [{:recv_timeout, @connection_timeout}] # ++ [{:proxy, "127.0.0.1:8888"}]
 
     response
   end
 
-  def post(url, authorisation_header, data_map) do
+  def post(url, headers, data_map) do
     {_, payload} = Jason.encode(data_map)
+    headers = headers ++ [{"Accept", @accept}, {"User-Agent", user_agent()}]
 
-    {:ok, response} = HTTPoison.post url, payload, [{"Authorization", authorisation_header}, {"Accept", @accept}, {"User-Agent", user_agent()}], [{:recv_timeout, @connection_timeout}] # ++ [{:proxy, "127.0.0.1:8888"}]
+    {:ok, response} = HTTPoison.post url, payload, headers, [{:recv_timeout, @connection_timeout}] # ++ [{:proxy, "127.0.0.1:8888"}]
+
+    response
+  end
+
+  def post_token(url, headers, data_map) do
+    headers = headers ++ [{"Accept", @accept}, {"User-Agent", user_agent()}]
+    {:ok, response} = HTTPoison.post url, data_map, headers, [{:recv_timeout, @connection_timeout}] # ++ [{:proxy, "127.0.0.1:8888"}]
 
     response
   end
