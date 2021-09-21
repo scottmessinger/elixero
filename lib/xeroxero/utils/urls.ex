@@ -2,6 +2,7 @@ defmodule XeroXero.Utils.Urls do
 
   #urls
   @base_url "https://api.xero.com/"
+  @token_url "https://identity.xero.com/connect"
   @request_token_url @base_url <> "oauth/RequestToken"
   @access_token_url @base_url <> "oauth/AccessToken"
   @authorise_url @base_url <> "oauth/Authorize"
@@ -14,6 +15,10 @@ defmodule XeroXero.Utils.Urls do
 
   def request_token do
     @request_token_url
+  end
+
+  def token_url(resource) do
+    @token_url <> resource
   end
 
   def authorise(oauth_token) do

@@ -21,6 +21,14 @@ defmodule XeroXero do
     end
   end
 
+  def create_client(token) do
+    case(Application.get_env(:xeroxero, :app_type)) do
+        :private -> %XeroXero.Client{app_type: :private, access_token: token.access_token}
+        :public -> %XeroXero.Client{app_type: :public, access_token: token.access_token}
+        :partner -> %XeroXero.Client{app_type: :partner, access_token: token.access_token}
+      end
+  end
+
   def create_client(request_token, verifier) do
     response =
       case(Application.get_env(:xeroxero, :app_type)) do
@@ -46,14 +54,6 @@ defmodule XeroXero do
     case response do
       %{"http_status_code" => 200}  -> create_client response
       _                             -> response
-    end
-  end
-
-  defp create_client(access_token) do
-    case(Application.get_env(:xeroxero, :app_type)) do
-      :private -> raise "Nope. No need for access token"
-      :public -> %XeroXero.Client{app_type: :public, access_token: access_token}
-      :partner -> %XeroXero.Client{app_type: :partner, access_token: access_token}
     end
   end
 end

@@ -33,7 +33,7 @@ defmodule XeroXero.CoreApi.ContactGroups do
     resource = @resource <> "/" <> identifier <> "/contacts"
 
     case client.app_type do
-      :private -> XeroXero.Private.create(client.access_token, resource, @api_type, contacts_map)
+      :private -> XeroXero.Private.create(client, resource, @api_type, contacts_map)
       :public -> XeroXero.Public.create(client.access_token, resource, @api_type, contacts_map)
       :partner -> XeroXero.Partner.create(client.access_token, resource, @api_type, contacts_map)
     end

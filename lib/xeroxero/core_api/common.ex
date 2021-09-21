@@ -3,7 +3,7 @@ defmodule XeroXero.CoreApi.Common do
 
   def find(client, resource) do
     case client.app_type do
-      :private -> XeroXero.Private.find(client.access_token, resource, @api_type)
+      :private -> XeroXero.Private.find(client, resource, @api_type)
       :public -> XeroXero.Public.find(client.access_token, resource, @api_type)
       :partner -> XeroXero.Partner.find(client.access_token, resource, @api_type)
     end
@@ -26,7 +26,7 @@ defmodule XeroXero.CoreApi.Common do
       end
 
     case client.app_type do
-      :private -> XeroXero.Private.find(client.access_token, resource, @api_type, query_filters, extra_headers)
+      :private -> XeroXero.Private.find(client, resource, @api_type, query_filters, extra_headers)
       :public -> XeroXero.Public.find(client.access_token, resource, @api_type, query_filters, extra_headers)
       :partner -> XeroXero.Partner.find(client.access_token, resource, @api_type, query_filters, extra_headers)
     end
@@ -34,7 +34,7 @@ defmodule XeroXero.CoreApi.Common do
 
   def create(client, resource, object_map) do
     case client.app_type do
-      :private -> XeroXero.Private.create(client.access_token, resource, @api_type, object_map)
+      :private -> XeroXero.Private.create(client, resource, @api_type, object_map)
       :public -> XeroXero.Public.create(client.access_token, resource, @api_type, object_map)
       :partner -> XeroXero.Partner.create(client.access_token, resource, @api_type, object_map)
     end
@@ -44,7 +44,7 @@ defmodule XeroXero.CoreApi.Common do
     resource = resource <> "/" <> identifier
 
     case client.app_type do
-      :private -> XeroXero.Private.update(client.access_token, resource, @api_type, object_map)
+      :private -> XeroXero.Private.update(client, resource, @api_type, object_map)
       :public -> XeroXero.Public.update(client.access_token, resource, @api_type, object_map)
       :partner -> XeroXero.Partner.update(client.access_token, resource, @api_type, object_map)
     end
@@ -54,7 +54,7 @@ defmodule XeroXero.CoreApi.Common do
     resource = resource <> "/" <> identifier
 
     case client.app_type do
-      :private -> XeroXero.Private.delete(client.access_token, resource, @api_type)
+      :private -> XeroXero.Private.delete(client, resource, @api_type)
       :public -> XeroXero.Public.find(client.access_token, resource, @api_type)
       :partner -> XeroXero.Partner.find(client.access_token, resource, @api_type)
     end
