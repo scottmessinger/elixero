@@ -1,22 +1,18 @@
 defmodule XeroXero.Utils.Http do
 
-  def user_agent do
-    "XeroXero - " <> Application.get_env(:xeroxero, :consumer_key)
-  end
-
   @accept "application/json"
 
   @connection_timeout 330000
 
   def get(url, authorisation_header) do
 
-    {:ok, response} = HTTPoison.get url, [{"Authorization", authorisation_header}, {"Accept", @accept}, {"User-Agent", user_agent()}], [{:recv_timeout, @connection_timeout}] # ++ [{:proxy, "127.0.0.1:8888"}]
+    {:ok, response} = HTTPoison.get url, [{"Authorization", authorisation_header}, {"Accept", @accept}], [{:recv_timeout, @connection_timeout}] # ++ [{:proxy, "127.0.0.1:8888"}]
 
     response
   end
 
   def get(url, authorisation_header, extra_headers) do
-    headers = [{"Authorization", authorisation_header}, {"Accept", @accept}, {"User-Agent", user_agent()}] ++ extra_headers
+    headers = [{"Authorization", authorisation_header}, {"Accept", @accept}] ++ extra_headers
 
     {:ok, response} = HTTPoison.get url, headers, [{:recv_timeout, @connection_timeout}] # ++ [{:proxy, "127.0.0.1:8888"}]
 
@@ -26,7 +22,7 @@ defmodule XeroXero.Utils.Http do
   def put(url, headers, data_map) do
     {_, payload} = Jason.encode(data_map)
 
-    headers = headers ++ [{"Accept", @accept}, {"User-Agent", user_agent()}]
+    headers = headers ++ [{"Accept", @accept}]
     {:ok, response} = HTTPoison.put url, payload, headers, [{:recv_timeout, @connection_timeout}] # ++ [{:proxy, "127.0.0.1:8888"}]
 
     response
@@ -34,7 +30,7 @@ defmodule XeroXero.Utils.Http do
 
   def post(url, headers, data_map) do
     {_, payload} = Jason.encode(data_map)
-    headers = headers ++ [{"Accept", @accept}, {"User-Agent", user_agent()}]
+    headers = headers ++ [{"Accept", @accept}]
 
     {:ok, response} = HTTPoison.post url, payload, headers, [{:recv_timeout, @connection_timeout}] # ++ [{:proxy, "127.0.0.1:8888"}]
 
@@ -42,14 +38,14 @@ defmodule XeroXero.Utils.Http do
   end
 
   def post_token(url, headers, data_map) do
-    headers = headers ++ [{"Accept", @accept}, {"User-Agent", user_agent()}]
+    headers = headers ++ [{"Accept", @accept}]
     {:ok, response} = HTTPoison.post url, data_map, headers, [{:recv_timeout, @connection_timeout}] # ++ [{:proxy, "127.0.0.1:8888"}]
 
     response
   end
 
   def delete(url, authorisation_header) do
-    {:ok, response} = HTTPoison.delete url, [{"Authorization", authorisation_header}, {"Accept", @accept}, {"User-Agent", user_agent()}], [{:recv_timeout, @connection_timeout}] # ++ [{:proxy, "127.0.0.1:8888"}]
+    {:ok, response} = HTTPoison.delete url, [{"Authorization", authorisation_header}, {"Accept", @accept}], [{:recv_timeout, @connection_timeout}] # ++ [{:proxy, "127.0.0.1:8888"}]
 
     response
   end
@@ -59,13 +55,13 @@ defmodule XeroXero.Utils.Http do
     # Hackney sets this to be the filename from the path of the file. We need to override it
     content_disposition_overload = "form-data; filename=\"" <> name <> "\""
 
-    {:ok, response} = HTTPoison.post url, {:multipart, [{:file, path_to_file, [{"Content-Disposition", content_disposition_overload}]}]}, [{"Authorization", authorisation_header}, {"Accept", @accept}, {"User-Agent", user_agent()}], [{:recv_timeout, @connection_timeout}] # ++ [{:proxy, "127.0.0.1:8888"}]
+    {:ok, response} = HTTPoison.post url, {:multipart, [{:file, path_to_file, [{"Content-Disposition", content_disposition_overload}]}]}, [{"Authorization", authorisation_header}, {"Accept", @accept}], [{:recv_timeout, @connection_timeout}] # ++ [{:proxy, "127.0.0.1:8888"}]
 
     handle_response(response)
   end
 
   def post_file(url, authorisation_header, path_to_file) do
-    {:ok, response} = HTTPoison.post url, {:file, path_to_file}, [{"Authorization", authorisation_header}, {"Accept", @accept}, {"User-Agent", user_agent()}], [{:recv_timeout, @connection_timeout}] # ++ [{:proxy, "127.0.0.1:8888"}]
+    {:ok, response} = HTTPoison.post url, {:file, path_to_file}, [{"Authorization", authorisation_header}, {"Accept", @accept}], [{:recv_timeout, @connection_timeout}] # ++ [{:proxy, "127.0.0.1:8888"}]
 
     response
   end
