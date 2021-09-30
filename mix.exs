@@ -3,7 +3,7 @@ defmodule XeroXero.Mixfile do
 
   def project do
     [app: :xeroxero,
-     version: "0.7.0",
+     version: "0.7.1",
      elixir: "~> 1.10",
      description: description(),
      package: package(),
@@ -35,7 +35,7 @@ defmodule XeroXero.Mixfile do
     [
       maintainers: ["MJMortimer"],
       licenses: ["MIT"],
-      links: %{"Github" => "https://github.com/etehtsea/elixero"}
+      links: %{"Github" => "https://github.com/handdii/elixero"}
     ]
   end
 end
