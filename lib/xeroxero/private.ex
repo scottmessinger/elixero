@@ -1,13 +1,5 @@
 defmodule XeroXero.Private do
 
-  def refresh_token(resource, refresh_token, client_id, client_secret) do
-    url = XeroXero.Utils.Urls.token_url(resource)
-    data_map = %{grant_type: "refresh_token", refresh_token: refresh_token}
-    header = "Basic " <> Base.encode64(client_id <> ":" <> client_secret)
-
-    XeroXero.Utils.Http.post(url, header, data_map)
-  end
-
   def find(client, resource, api_type) do
     url = XeroXero.Utils.Urls.api(resource, api_type)
     headers = [{"Authorization", "Bearer " <> client.access_token}, {"xero-tenant-id", client.xero_tenant_id}]
