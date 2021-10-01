@@ -11,7 +11,7 @@ defmodule XeroXero.Private do
     url = XeroXero.Utils.Urls.api(resource, api_type) |> XeroXero.Utils.Urls.append_query_filters(query_filters)
     headers = [{"Authorization", "Bearer " <> client.access_token}, {"xero-tenant-id", client.xero_tenant_id}]
 
-    XeroXero.Utils.Http.get(url, headers, extra_headers)
+    XeroXero.Utils.Http.get(url, headers)
   end
 
   def create(client, resource, api_type, data_map) do
