@@ -114,7 +114,7 @@ defmodule XeroXero.Utils.Oauth do
         _ -> oauth_consumer_secret() <> "&" <> token["oauth_token_secret"]
       end
 
-    signed = :crypto.hmac(:sha, key, base_string)
+    signed = :crypto.mac(:hmac, :sha, key, base_string)
     URI.encode(Base.encode64(signed), &URI.char_unreserved?(&1))
   end
 end
